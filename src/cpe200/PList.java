@@ -100,7 +100,11 @@ public class PList {
     // rename the search method to "found(Object data)"
     public boolean found(Object data) {
         // implement your code here!!!
-        PList tmp ;
+        PNode tmp = head  ;
+        while (tmp != null){
+            if(tmp.data.equals(data)) return true;
+            tmp = tmp.next ;
+        }
 
         return false;
     }
