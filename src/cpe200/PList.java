@@ -62,23 +62,13 @@ public class PList {
 
         while (tmp != null) {
             if (tmp.data.equals(data)) {
-                // implement your code here!!!
-                // case 1: head of the list
-                if(tmp == head ) {
-                    popHead();
-                }
-                // case 2: tail of the list
-                if(tmp == tail ) {
-                    popTail();
-                }
-                // case 3: somewhere in the middle
-                else {
-                    tmp2 = tmp.prev ;
-                    tmp2.next = tmp.next ;
-                    tmp.next.prev = tmp2 ;
-                    size-- ;
-
-                }
+                if (tmp.prev != null)
+                    tmp.prev.next = tmp.next;
+                if (tmp.next != null)
+                    tmp.next.prev = tmp.prev;
+                if(tmp==head)
+                    head = tmp.next;
+                size--;
                 return true;
             }
             tmp = tmp.next;
