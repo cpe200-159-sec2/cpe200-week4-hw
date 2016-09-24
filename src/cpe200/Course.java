@@ -125,7 +125,10 @@ public class Course {
 
         // Information on student(s) who has enrolled in this course
         // implement your code here!!!
-
+        for(int i = 0 ; i < this.students.getSize() ; i++){
+            Student s = (Student) students.elementAt(i);
+            o+= "\n" + s.getStudent_id() +" - "+ s.getName() ;
+        }
         return o;
     }
 
