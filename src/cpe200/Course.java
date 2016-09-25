@@ -24,6 +24,7 @@ public class Course {
 
         // initialized the list of enrolled students
         // implement your code here!!!
+        student = new PList();
     }
 
     public boolean enrollStudent(Student s) {
@@ -36,20 +37,37 @@ public class Course {
             // print message and return value accordingly
 
             // implement your code here!!!
+            if(this.student.found(s)){
+                System.out.println(s.getStudent_id() + " has already enrolled in " + this.getCourse_id() + ".");
+                return false;
+            }
+            else{
+                System.out.println(s.getStudent_id() + " has enrolled in " + this.getCourse_id() + " successfully.");
+                this.student.pushToTail(s);
+                this.no_students++;
+                return true;
+            }
 
         } else {
             // print error message, and return value accordingly
             // implement your code here!!!
+            System.out.println(s.getStudent_id() + " cannot enroll in this course, " + this.getCourse_id() + " is full.");
+            return false;
         }
-
-        return false;
 
     }
 
     public boolean removeStudent(Student s) {
         // implement your code here!!!
-
-        return false;
+        if(this.student.remove(s)){
+            System.out.println(s.getStudent_id() + " has been removed from " + this.getCourse_id() + " successfully.");
+            this.no_students--;
+            return true;
+        }
+        else{
+            System.out.println(s.getStudent_id() + " is NOT enrolled in " + this.getCourse_id() + ".");
+            return false;
+        }
     }
 
     public String getCourse_name() {
@@ -109,6 +127,12 @@ public class Course {
 
         // Information on student(s) who has enrolled in this course
         // implement your code here!!!
+        for (int i=0; i<student.getSize(); i++) {
+            Student s = (Student)student.elementAt(i);
+
+            // implement your code here!!!
+            o +=  "\n\t" + s.getStudent_id() + " - " + s.getName();
+        }
 
         return o;
     }
@@ -131,5 +155,6 @@ public class Course {
 
     // add a list of enrolled students
     // implement your code here!!!
+    private PList student;
 
 }
