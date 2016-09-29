@@ -24,11 +24,12 @@ public class Course {
 
         // initialized the list of enrolled students
         // implement your code here!!!
+        this.students = new PList();
     }
 
     public boolean enrollStudent(Student s) {
 
-        if (this.no_students < this.max_students) {
+        if (this.no_students < this.max_students && !this.students.found(s)) {
             // check if the course is FULL
             // check if the student has ALREADY enrolled in this course
             // add the student to the list of students (PList)
@@ -36,10 +37,19 @@ public class Course {
             // print message and return value accordingly
 
             // implement your code here!!!
+            students.pushToTail(s);
+            no_students++;
+            System.out.println(s.getStudent_id() + " has enrolled in " + this.course_id + " successfully.");
+            return true;
 
+        }
+
+        if(students.found(s)) {
+            System.out.println(s.getStudent_id() + " has already enrolled in " + this.course_id);
         } else {
             // print error message, and return value accordingly
             // implement your code here!!!
+            System.out.println(s.getStudent_id() + " cannot enroll in this course, " + this.course_id + " is full.");
         }
 
         return false;
@@ -48,8 +58,16 @@ public class Course {
 
     public boolean removeStudent(Student s) {
         // implement your code here!!!
+         if(students.remove(s)){
+            no_students--;
+            System.out.println(s.getStudent_id() + " has been removed from " + this.course_id + " successfully.");
+            return true;
+        }
 
-        return false;
+            System.out.println(s.getStudent_id() + " cannot enroll in this course, " );
+            return false;
+
+
     }
 
     public String getCourse_name() {
@@ -129,7 +147,8 @@ public class Course {
     private int max_students;
     private int no_students;
 
+
     // add a list of enrolled students
     // implement your code here!!!
-
+    private PList students;
 }
