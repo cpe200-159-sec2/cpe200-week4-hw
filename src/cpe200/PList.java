@@ -2,11 +2,13 @@ package cpe200;
 
 public class PList {
 
-    public PList() { head = tail = null; }
+    public PList() {
+        head = tail = null;
+    }
 
     public void pushToHead(Object i) {
         head = new PNode(i, head, null);
-        if (tail==null)
+        if (tail == null)
             tail = head;
         else
             head.next.prev = head;
@@ -14,8 +16,8 @@ public class PList {
     }
 
     public void pushToTail(Object i) {
-        tail = new PNode(i,null, tail);
-        if (head==null)
+        tail = new PNode(i, null, tail);
+        if (head == null)
             head = tail;
         else
             tail.prev.next = tail;
@@ -23,10 +25,10 @@ public class PList {
     }
 
     public Object popHead() {
-        Object data=head.data;
+        Object data = head.data;
         PNode tmp = head;
 
-        if (head==tail)
+        if (head == tail)
             head = tail = null;
         else {
             head = head.next;
@@ -40,10 +42,10 @@ public class PList {
     }
 
     public Object popTail() {
-        Object data=tail.data;
+        Object data = tail.data;
         PNode tmp = tail;
 
-        if (tail==head)
+        if (tail == head)
             tail = head = null;
         else {
             tail = tail.prev;
@@ -57,32 +59,63 @@ public class PList {
     }
 
     public boolean remove(Object data) {
+        PNode tmp=head;
+        while (tmp!=null){
+            if(tmp.data.equals(data)){
+                if(tmp==head){
+                    popHead();
+                    return true;
+                }else if(tmp==tail){
+                    popTail();
+                    return true;
+                }else{
+                    tmp.prev.next=tmp.next;
+                    tmp.next.prev=tmp.prev;
 
-        PNode tmp = head, tmp2;
+                    return true;
+                }
 
-        while (tmp != null) {
-            if (tmp.data.equals(data)) {
-                // implement your code here!!!
-                // case 1: head of the list
-                // case 2: tail of the list
-                // case 3: somewhere in the middle
             }
-            tmp = tmp.next;
+            tmp=tmp.next;
         }
         return false;
+
+        // implement your code here!!!
+        // case 1: head of the list
+        // case 2: tail of the list
+        // case 3: somewhere in the middle
     }
+
+
+
 
     public Object elementAt(int index) {
         // implement your code here!!!
         // what if index is not in between 0 to (size-1)
-
-        return null;
+        if (index<0||index>size-1){
+            return null;
+        }
+        PNode tmp=head;
+        for (int i=0;i<size-1;i++){
+            if(i==index){
+                return  tmp.data;
+            }else{
+            tmp=tmp.next;
+            }
+        }
+        return  null;
     }
 
     // rename the search method to "found(Object data)"
     public boolean found(Object data) {
         // implement your code here!!!
-
+        PNode tmp=head;
+        while (tmp!=null){
+            if (tmp.data.equals(data)){
+                return  true;
+            }
+            tmp=tmp.next;
+        }
         return false;
     }
 
