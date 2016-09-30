@@ -57,15 +57,18 @@ public class PList {
     }
 
     public boolean remove(Object data) {
-
-        PNode tmp = head, tmp2;
-
+        PNode tmp = head;
         while (tmp != null) {
             if (tmp.data.equals(data)) {
-                // implement your code here!!!
-                // case 1: head of the list
-                // case 2: tail of the list
-                // case 3: somewhere in the middle
+                if (tmp == head) { // case 1: head of the list
+                    popHead();
+                } else if (tmp == tail) {// case 2: tail of the list
+                    popTail();
+                } else {   // case 3: somewhere in the middle
+                    tmp.prev.next = tmp.next;
+                    tmp.next.prev = tmp.prev;
+                }
+                return true;
             }
             tmp = tmp.next;
         }
@@ -73,20 +76,40 @@ public class PList {
     }
 
     public Object elementAt(int index) {
-        // implement your code here!!!
-        // what if index is not in between 0 to (size-1)
-
+        PNode temp = head; // implement your code here!!!
+        if ( index > size - 1 || index < 0) {// what if index is not in between 0 to (size-1)
+            return  null;
+        }
+            for (int i=0 ; i < size -1 ;i++){
+                if (i == index){
+                    return temp.data;
+                }else {
+                temp = temp.next;
+                }
+            }
         return null;
     }
 
     // rename the search method to "found(Object data)"
     public boolean found(Object data) {
-        // implement your code here!!!
-
+        PNode temp = head; // implement your code here!!!
+        while (temp != null){
+            if (temp.data.equals(data)){
+                return true;
+            } else {
+                temp = temp.next;
+            }
+        }
         return false;
     }
 
-    public boolean isEmpty() { return (head == null); }
+    public boolean isEmpty() {
+        if (head == null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     public void printForward() {
         PNode tmp = head;
