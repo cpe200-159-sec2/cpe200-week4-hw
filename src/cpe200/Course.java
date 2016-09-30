@@ -24,6 +24,7 @@ public class Course {
 
         // initialized the list of enrolled students
         // implement your code here!!!
+        this.student = new PList();
     }
 
     public boolean enrollStudent(Student s) {
@@ -31,25 +32,44 @@ public class Course {
         if (this.no_students < this.max_students) {
             // check if the course is FULL
             // check if the student has ALREADY enrolled in this course
-            // add the student to the list of students (PList)
-            // update number of students in the course
-            // print message and return value accordingly
+            if(!student.found(s)) {
+                // add the student to the list of students (PList)
+                student.pushToTail(s);
+                // update number of students in the course
+                this.no_students++;
+                // print message and return value accordingly
+                System.out.println(s.getStudent_id() + " has enroll in " + this.getCourse_id() + " successfully.");
+                // implement your code here!!!
+                return true;
+            }
+            else {
+                System.out.println(s.getStudent_id()+" has already enroll in "+this.getCourse_id()+".");
+                return false;
+                }
+            }
 
-            // implement your code here!!!
-
-        } else {
+         else {
             // print error message, and return value accordingly
+            System.out.println(s.getStudent_id() + " cannot enroll in this course, " + this.course_id + " is full.");
             // implement your code here!!!
+            return false;
         }
 
-        return false;
 
     }
 
     public boolean removeStudent(Student s) {
         // implement your code here!!!
-
-        return false;
+        if(student.found(s)){
+            student.remove(s);
+            System.out.println(s.getStudent_id()+" has already enroll in "+this.getCourse_id()+".");
+            this.no_students--;
+            return true;
+        }
+        else {
+            System.out.println(s.getStudent_id()+" in NOT enrolled in "+this.getCourse_id()+".");
+            return false;
+        }
     }
 
     public String getCourse_name() {
@@ -109,7 +129,10 @@ public class Course {
 
         // Information on student(s) who has enrolled in this course
         // implement your code here!!!
-
+        for(int i = 0;i<this.student.getSize();i++){
+            Student s = (Student) student.elementAt(i);
+            o += "\n\t" + s.getStudent_id() + " - "+s.getName();
+        }
         return o;
     }
 
@@ -128,7 +151,7 @@ public class Course {
     private String lecturer;
     private int max_students;
     private int no_students;
-
+    private PList student;
     // add a list of enrolled students
     // implement your code here!!!
 
