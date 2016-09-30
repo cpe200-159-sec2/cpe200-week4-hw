@@ -2,7 +2,9 @@ package cpe200;
 
 public class PList {
 
-    public PList() { head = tail = null; }
+    public PList() {
+        head = tail = null;
+    }
 
     public void pushToHead(Object i) {
         head = new PNode(i, head, null);
@@ -14,7 +16,7 @@ public class PList {
     }
 
     public void pushToTail(Object i) {
-        tail = new PNode(i,null, tail);
+        tail = new PNode(i, null, tail);
         if (head==null)
             head = tail;
         else
@@ -33,9 +35,7 @@ public class PList {
             head.prev = null;
             tmp.next = null;
         }
-
         size--;
-
         return data;
     }
 
@@ -50,9 +50,7 @@ public class PList {
             tail.next = null;
             tmp.prev = null;
         }
-
         size--;
-
         return data;
     }
 
@@ -63,9 +61,17 @@ public class PList {
         while (tmp != null) {
             if (tmp.data.equals(data)) {
                 // implement your code here!!!
-                // case 1: head of the list
-                // case 2: tail of the list
-                // case 3: somewhere in the middle
+                if (tmp == head){// case 1: head of the list
+                    head = head.next;
+                } else if (tmp == tail) { // case 2: tail of the list
+                    tail = tail.prev;
+                } else { // case 3: somewhere in the middle
+                    tmp2 = tmp.next;
+                    tmp2.prev = tmp.prev;
+                    tmp.prev.next = tmp2;
+                }
+                size--;
+                return true;
             }
             tmp = tmp.next;
         }
@@ -75,18 +81,33 @@ public class PList {
     public Object elementAt(int index) {
         // implement your code here!!!
         // what if index is not in between 0 to (size-1)
+        PNode tmp = head;
+        if (index >= size || index < 0){
+            return null;
+        }
+        for (int i=0; i<index; i++){
+            tmp = tmp.next;
+        }
 
-        return null;
+        return tmp.data;
     }
 
     // rename the search method to "found(Object data)"
     public boolean found(Object data) {
         // implement your code here!!!
-
+        PNode tmp = head;
+        while (tmp != null){
+            if (tmp.data.equals(data)) {
+                return  true;
+            }
+            tmp = tmp.next;
+        }
         return false;
     }
 
-    public boolean isEmpty() { return (head == null); }
+    public boolean isEmpty() {
+        return (head == null);
+    }
 
     public void printForward() {
         PNode tmp = head;
