@@ -27,6 +27,7 @@ public class Student {
     public boolean addCourse(Course c) {
         if (c.enrollStudent(this)) {    // enroll the course with "this" student object
             // add the new course to the list of enrolled courses (PList)
+            courses.pushToTail(c);
             // implement your code here!!!
 
             return true;
@@ -36,9 +37,14 @@ public class Student {
 
     public boolean dropCourse(Course c) {
         // remove "this" student from the course
+        if(c.removeStudent(this)){
+            courses.remove(c);
+            return true;
+        }
         // implement your code here!!!
-
-        return false;
+        else{
+            return false;
+        }
     }
 
     public String getName() {
@@ -89,7 +95,7 @@ public class Student {
             Course c = (Course)courses.elementAt(i);
 
             // implement your code here!!!
-            o += "\n\tshow course information here...";
+            o += "\n\t" + c.getCourse_id() + " - "+c.getCourse_name();
         }
 
         return o;
