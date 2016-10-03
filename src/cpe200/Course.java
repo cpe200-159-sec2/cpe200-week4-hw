@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Course {
 
+
     public Course() { this("","","",DMAX); }
 
     public Course(String n, String cid) {
@@ -21,25 +22,25 @@ public class Course {
         this.lecturer = !l.equalsIgnoreCase("")?l:"TBA";
         this.max_students = max<DMAX?DMAX:max;
         this.no_students = 0;
+        this.students = new PList();
 
-        // initialized the list of enrolled students
-        // implement your code here!!!
     }
 
     public boolean enrollStudent(Student s) {
 
         if (this.no_students < this.max_students) {
-            // check if the course is FULL
-            // check if the student has ALREADY enrolled in this course
-            // add the student to the list of students (PList)
-            // update number of students in the course
-            // print message and return value accordingly
 
-            // implement your code here!!!
+            if(students.found(s)){
+                System.out.println(s.getStudent_id()+" is already enrolled in "+this.course_id);
+                return false;
+            }
 
+            students.pushToTail(s);
+            no_students++;
+            System.out.println(s.getStudent_id()+" has enrolled in "+this.course_id +" completely.");
+            return true;
         } else {
-            // print error message, and return value accordingly
-            // implement your code here!!!
+            System.out.println(s.getStudent_id() +" cannot enroll in this course," + this.course_id + " is full.");
         }
 
         return false;
@@ -47,8 +48,12 @@ public class Course {
     }
 
     public boolean removeStudent(Student s) {
-        // implement your code here!!!
-
+        if (students.remove(s)) {
+            no_students--;
+            System.out.println(s.getStudent_id() + " has been removed form " + this.course_id  + " completely.");
+            return true;
+        }
+        System.out.println(s.getStudent_id() + " is not enrolled in "+ this.course_id+".");
         return false;
     }
 
@@ -57,6 +62,7 @@ public class Course {
     }
 
     public void setCourse_name(String course_name) {
+
         this.course_name = !course_name.equalsIgnoreCase("")?course_name:this.course_name;
     }
 
@@ -128,7 +134,7 @@ public class Course {
     private String lecturer;
     private int max_students;
     private int no_students;
-
+    private PList students;
     // add a list of enrolled students
     // implement your code here!!!
 
