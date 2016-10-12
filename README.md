@@ -44,7 +44,7 @@ Methods:
 * Add the "enrollStudent(Student s)" method to add a student to a course.
     * Need to check if the course is FULL or not?
     * Need to check if the student is ALREADY ENROLLED to the course or not?
-    * Return TRUE, if the student is enrolled successfully. 
+    * Return TRUE, if the student is enrolled successfully.
     * Otherwise, print error message, and return FALSE.
 * Add the "removeStudent(Student s)" method to remove a student from a course.
     * Need to check if the course has NO STUDENT or not?
