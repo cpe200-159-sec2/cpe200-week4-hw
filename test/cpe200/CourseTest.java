@@ -16,21 +16,21 @@ public class CourseTest {
     @Test
     public void defaultConstructor() throws Exception {
         c = new Course();
-        assertEquals("TBA", c.getCourse_name());
-        assertEquals("000000", c.getCourse_id());
+        assertEquals("TBA", c.getCourseName());
+        assertEquals("000000", c.getCourseID());
         assertEquals("TBA", c.getLecturer());
-        assertEquals(3, c.getMax_students() );
-        assertEquals(0, c.getNo_students());
+        assertEquals(3, c.getMaxStudents() );
+        assertEquals(0, c.getStudentNo());
     }
 
     @Test
     public void parameterizedConstructor() throws Exception {
         c = new Course("Web Programming", "269103", "Kenneth Cosh", 40);
-        assertEquals("Web Programming", c.getCourse_name());
-        assertEquals("269103", c.getCourse_id());
+        assertEquals("Web Programming", c.getCourseName());
+        assertEquals("269103", c.getCourseID());
         assertEquals("Kenneth Cosh", c.getLecturer());
-        assertEquals(40, c.getMax_students() );
-        assertEquals(0, c.getNo_students());
+        assertEquals(40, c.getMaxStudents() );
+        assertEquals(0, c.getStudentNo());
     }
 
     @Before
@@ -41,48 +41,48 @@ public class CourseTest {
     @Test
     public void validAttributes() throws Exception {
         // continue from setUp() method
-        c.setCourse_id("261200");
+        c.setCourseID("261200");
         c.setLecturer(c.getLecturer() + " and Dome Potikanond");
-        c.setMax_students(60);
+        c.setMaxStudents(60);
 
-        assertEquals("261200", c.getCourse_id());
+        assertEquals("261200", c.getCourseID());
         assertEquals("Pruet Boonma and Dome Potikanond", c.getLecturer());
-        assertEquals(60, c.getMax_students());
+        assertEquals(60, c.getMaxStudents());
     }
 
     @Test
     public void invalidAttributes() throws Exception {
-        c.setCourse_name("");
-        c.setCourse_id("CPE200");
+        c.setCourseName("");
+        c.setCourseID("CPE200");
         c.setLecturer("");
-        c.setMax_students(-10);
+        c.setMaxStudents(-10);
 
-        assertEquals("CPE200-OOP", c.getCourse_name());
-        assertEquals("261344", c.getCourse_id());
+        assertEquals("CPE200-OOP", c.getCourseName());
+        assertEquals("261344", c.getCourseID());
         assertEquals("Pruet Boonma", c.getLecturer());
-        assertEquals(60, c.getMax_students() );
+        assertEquals(60, c.getMaxStudents() );
 
-        c.setCourse_id("2612003");
-        assertEquals("261344", c.getCourse_id());
-        c.setNo_students(80);
-        assertEquals(0, c.getNo_students());
-        c.setNo_students(-3);
-        assertEquals(0, c.getNo_students());
+        c.setCourseID("2612003");
+        assertEquals("261344", c.getCourseID());
+        c.setStudentNo(80);
+        assertEquals(0, c.getStudentNo());
+        c.setStudentNo(-3);
+        assertEquals(0, c.getStudentNo());
 
     }
 
     @Test
     public void checkToStringNoStudent() throws Exception {
         c.setLecturer(c.getLecturer() + " and Dome Potikanond");
-        c.setCourse_id("261200");
+        c.setCourseID("261200");
         assertEquals("CPE200-OOP (261200), Teacher: Pruet Boonma and Dome Potikanond"
                 + ", has NO student, [maximum: 60]", c.toString());
     }
 
     @Test
     public void checkToStringOneStudent() throws Exception {
-        c.setNo_students(1);
-        c.setCourse_id("261200");
+        c.setStudentNo(1);
+        c.setCourseID("261200");
         c.setLecturer(c.getLecturer() + " and Dome Potikanond");
         assertEquals("CPE200-OOP (261200), Teacher: Pruet Boonma and Dome Potikanond"
                 + ", has ONE student, [maximum: 60]", c.toString());
@@ -90,8 +90,8 @@ public class CourseTest {
 
     @Test
     public void checkToStringManyStudent() throws Exception {
-        c.setNo_students(45);
-        c.setCourse_id("261200");
+        c.setStudentNo(45);
+        c.setCourseID("261200");
         c.setLecturer(c.getLecturer() + " and Dome Potikanond");
         assertEquals("CPE200-OOP (261200), Teacher: Pruet Boonma and Dome Potikanond"
                 + ", has 45 students, [maximum: 60]", c.toString());
