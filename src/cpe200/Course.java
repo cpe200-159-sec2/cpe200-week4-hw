@@ -21,6 +21,7 @@ public class Course {
         this.lecturer = !l.equalsIgnoreCase("")?l:"TBA";
         this.max_students = max<DMAX?DMAX:max;
         this.no_students = 0;
+        this.students = new PList();
 
         // initialized the list of enrolled students
         // implement your code here!!!
@@ -36,10 +37,20 @@ public class Course {
             // print message and return value accordingly
 
             // implement your code here!!!
-
+            if (students.found(s)){
+                System.out.println(s.getStudent_id() + " has already rnrolled in "+ this.course_id);
+                return false;
+            }else {
+                students.pushToTail(s);
+                no_students++;
+                System.out.println(s.getStudent_id() + " has enrolled in " + this.course_id + "successfully.");
+                return true;
+            }
         } else {
             // print error message, and return value accordingly
             // implement your code here!!!
+            System.out.println(s.getStudent_id()+ "cannot enroll in this course " + this.course_id + "is full.");
+
         }
 
         return false;
@@ -48,8 +59,14 @@ public class Course {
 
     public boolean removeStudent(Student s) {
         // implement your code here!!!
-
-        return false;
+        if(students.remove(s)){
+            no_students--;
+            System.out.println(s.getStudent_id() + " has been removed from " + this.course_id + "successfully." );
+            return true;
+        }else {
+            System.out.println(s.getStudent_id() + " is NOT enrolled in "+ this.course_id + ".");
+            return false;
+        }
     }
 
     public String getCourse_name() {
@@ -128,6 +145,7 @@ public class Course {
     private String lecturer;
     private int max_students;
     private int no_students;
+    private PList students;
 
     // add a list of enrolled students
     // implement your code here!!!
