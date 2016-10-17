@@ -26,18 +26,18 @@ public class Student {
 
     public boolean addCourse(Course c) {
         if (c.enrollStudent(this)) {    // enroll the course with "this" student object
-            // add the new course to the list of enrolled courses (PList)
-            // implement your code here!!!
-
+            courses.pushToTail(c); // add the new course to the list of enrolled courses (PList)
             return true;
-        } else
-            return false;               // if unable to enroll a student
+        } else {
+            return false;  // if unable to enroll a student
+        }
     }
 
     public boolean dropCourse(Course c) {
-        // remove "this" student from the course
-        // implement your code here!!!
-
+        if (c.removeStudent(this)) {// remove "this" student from the course
+            courses.remove(c);
+            return true;
+        }
         return false;
     }
 
@@ -79,19 +79,19 @@ public class Student {
                 + this.student_id + ") was born in "
                 + this.year_of_birth + " ";
 
-        if (isActive)
+        if (isActive) {
             o = o + "is an ACTIVE student.";
-        else
+        } else {
             o = o + "is an INACTIVE student.";
+        }
 
         // Information on course(s) which this student has enrolled.
-        for (int i=0; i<courses.getSize(); i++) {
+        for (int i=0; i< courses.getSize(); i++) {
             Course c = (Course)courses.elementAt(i);
 
             // implement your code here!!!
-            o += "\n\tshow course information here...";
+            o += "\n\tshow this code here...";
         }
-
         return o;
     }
 

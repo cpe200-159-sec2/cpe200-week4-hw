@@ -21,6 +21,7 @@ public class Course {
         this.lecturer = !l.equalsIgnoreCase("")?l:"TBA";
         this.max_students = max<DMAX?DMAX:max;
         this.no_students = 0;
+        student = new PList();
 
         // initialized the list of enrolled students
         // implement your code here!!!
@@ -34,22 +35,37 @@ public class Course {
             // add the student to the list of students (PList)
             // update number of students in the course
             // print message and return value accordingly
-
-            // implement your code here!!!
-
+            if (!student.found(s)) {
+                student.pushToTail(s);
+                no_students++;
+                System.out.println(s.getStudent_id() + "has enrolled in "
+                        + course_id + " successfully.");
+                return true;
+            } else {
+                // print error message, and return value accordingly
+                // implement your code here!!!
+                System.out.println(s.getStudent_id() + " has already enrolled in "
+                        + this.getCourse_id() + ".");
+                return false;
+            }
         } else {
-            // print error message, and return value accordingly
-            // implement your code here!!!
+            System.out.println(s.getStudent_id() + " cannot enroll in this course, "
+                    + this.getCourse_id() + " is full.");
+            return false;
         }
-
-        return false;
-
     }
 
     public boolean removeStudent(Student s) {
         // implement your code here!!!
-
-        return false;
+        if (this.student.remove(s)){
+            System.out.println(s.getStudent_id() + " has been removed from "
+                + this.getCourse_id() + " successfully.");
+            this.no_students--;
+            return true;
+        } else {
+            System.out.println(s.getStudent_id() + " is NOT enrolled in " + this.getCourse_id() + ".");
+            return false;
+        }
     }
 
     public String getCourse_name() {
@@ -110,6 +126,9 @@ public class Course {
         // Information on student(s) who has enrolled in this course
         // implement your code here!!!
 
+        for (int i = 0; i < student.getSize() ; i++){
+            Student s = (Student)student.elementAt(i);
+        }
         return o;
     }
 
@@ -123,6 +142,7 @@ public class Course {
     private static final String idREGEX = "\\d{6}";
     private static final int DMAX = 3;
 
+    private PList student;
     private String course_name;
     private String course_id;
     private String lecturer;
